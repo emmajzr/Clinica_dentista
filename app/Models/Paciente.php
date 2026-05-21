@@ -16,11 +16,19 @@ class Paciente extends Model
         'codigo_postal',
         'genero',
         'fecha_nacimiento',
-        'user_id',
+        'id_user',
     ];
 
+    // Relación uno a uno con User
     public function user()
     {
         return $this->belongsTo(User::class);
     }
+
+    // Relación uno a muchos con Cita
+    public function citas()
+    {
+        return $this->hasMany(Cita::class);
+    }
+
 }

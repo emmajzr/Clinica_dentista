@@ -29,9 +29,20 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+    // Relaciones
 
+    // Un usuario puede ser un paciente o un dentista, pero no ambos
     public function paciente()
     {
         return $this->hasOne(Paciente::class);
     }
+
+    // Un usuario puede ser un paciente o un dentista, pero no ambos
+    public function dentista()
+    {
+        return $this->hasOne(Dentista::class);
+    }
+
+    
+
 }
