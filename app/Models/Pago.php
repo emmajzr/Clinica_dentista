@@ -17,6 +17,6 @@ class Pago extends Model
     // Relación uno a uno con Cita
     public function cita()
     {
-        return $this->belongsTo(Cita::class);
+        return $this->belongsTo(Cita::class, 'id_cita');
     }
 }

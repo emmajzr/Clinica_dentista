@@ -10,19 +10,19 @@ class Dentista extends Model
 
     protected $fillable = [
         'telefono',
-        'id_user',
+        'user_id',
     ];
     
     // Relación uno a uno con User
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id');
     }
 
     // Relación uno a muchos con Cita    
     public function citas()
     {
-        return $this->hasMany(Cita::class);
+        return $this->hasMany(Cita::class, 'id_dentista');
     }
 
     // Relación muchos a muchos con Especialidad
@@ -34,6 +34,6 @@ class Dentista extends Model
     // Relación uno a muchos con Horario
     public function horarios()
     {
-        return $this->hasMany(Horario::class);
+        return $this->hasMany(Horario::class, 'id_dentista');
     }
 }

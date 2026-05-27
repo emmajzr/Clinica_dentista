@@ -40,7 +40,7 @@ class User extends Authenticatable
     // Un usuario puede ser un paciente o un dentista, pero no ambos
     public function dentista()
     {
-        return $this->hasOne(Dentista::class);
+        return $this->hasOne(Dentista::class, 'id_user');
     }
 
     

@@ -16,12 +16,12 @@ class Cita_tratamiento extends Model
     // Relación con Cita y Tratamiento
     public function cita()
     {
-        return $this->belongsTo(Cita::class);
+        return $this->belongsTo(Cita::class,'cita_tratamiento', 'id_cita', 'id_tratamiento');
     }
 
-    // Relación con Tratamiento
-    public function tratamiento()
-    {
-        return $this->belongsTo(Tratamiento::class);
-    }
+    // Relación muchos a muchos con Tratamiento
+public function tratamientos()
+{
+    return $this->belongsToMany(Tratamiento::class, 'cita_tratamiento', 'id_cita', 'id_tratamiento');
+}
 }

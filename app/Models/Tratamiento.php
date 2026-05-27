@@ -16,8 +16,8 @@ class Tratamiento extends Model
 
     // Relación muchos a muchos con Cita_tratamiento
     public function citas()
-    {
-        return $this->belongsToMany(Cita::class);
-    }
+{
+    return $this->belongsToMany(Cita::class, 'cita_tratamiento', 'id_tratamiento', 'id_cita');
+}
 }
 

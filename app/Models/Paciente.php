@@ -16,7 +16,7 @@ class Paciente extends Model
         'codigo_postal',
         'genero',
         'fecha_nacimiento',
-        'id_user',
+        'user_id',
     ];
 
     // Relación uno a uno con User

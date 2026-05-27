@@ -1,11 +1,26 @@
-@import 'tailwindcss';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
-@source '../../storage/framework/views/*.php';
-@source '../**/*.blade.php';
-@source '../**/*.js';
+@import "@fortawesome/fontawesome-free/css/all.min.css";
 
-@theme {
-    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-        'Segoe UI Symbol', 'Noto Color Emoji';
+/* Transiciones suaves */
+* {
+    transition-property:
+        background-color, border-color, color, fill, stroke, opacity,
+        box-shadow, transform;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 150ms;
+}
+
+/* Sidebar scroll personalizado */
+aside::-webkit-scrollbar {
+    width: 4px;
+}
+aside::-webkit-scrollbar-track {
+    background: #1e293b;
+}
+aside::-webkit-scrollbar-thumb {
+    background: #0ea5e9;
+    border-radius: 2px;
 }

@@ -20,24 +20,24 @@ class Cita extends Model
     // Relación muchos a uno con Paciente
     public function paciente()
     {
-        return $this->belongsTo(Paciente::class);
+        return $this->belongsTo(Paciente::class, 'id_paciente');
     }
 
     // Relación muchos a uno con Dentista
     public function dentista()
     {
-        return $this->belongsTo(Dentista::class);
+        return $this->belongsTo(Dentista::class, 'id_dentista');
     }
 
-    // Relación muchos a muchos con Tratamiento
     public function tratamientos()
-    {
-        return $this->hasMany(Tratamiento::class);
-    }
+{
+    return $this->belongsToMany(Tratamiento::class, 'cita_tratamiento', 'id_cita', 'id_tratamiento');
+}
+
     
     // Relación uno a uno con Pago
     public function pagos()
     {
-        return $this->hasOne(Pago::class);
+        return $this->hasOne(Pago::class, 'id_cita');
     }
 }
