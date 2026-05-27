@@ -30,11 +30,10 @@ class Cita extends Model
     }
 
     public function tratamientos()
-{
-    return $this->belongsToMany(Tratamiento::class, 'cita_tratamiento', 'id_cita', 'id_tratamiento');
-}
+    {
+        return $this->belongsToMany(Tratamiento::class, 'cita_tratamiento', 'id_cita', 'id_tratamiento');
+    }
 
-    
     // Relación uno a uno con Pago
     public function pagos()
     {

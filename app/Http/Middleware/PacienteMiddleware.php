@@ -15,9 +15,10 @@ class PacienteMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if(!auth()->check() || auth()->user()->rol !== "paciente") {
+        if (! auth()->check() || auth()->user()->rol !== 'paciente') {
             abort(403, 'Unauthorized');
         }
+
         return $next($request);
     }
 }

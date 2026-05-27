@@ -6,9 +6,6 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
         Schema::create('dentistas', function (Blueprint $table) {
@@ -16,14 +13,11 @@ return new class extends Migration
             $table->string('telefono', 11);
             $table->foreignId('user_id')->constrained('users')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
-                //Campo unico
-                $table->unique('user_id');
+            // Campo unico
+            $table->unique('user_id');
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('dentistas');

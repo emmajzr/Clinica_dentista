@@ -15,9 +15,10 @@ class DenistaMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if(!auth()->check() || auth()->user()->rol !== "dentista") {
+        if (! auth()->check() || auth()->user()->rol !== 'dentista') {
             abort(403, 'Acceso no autorizado');
         }
+
         return $next($request);
     }
 }

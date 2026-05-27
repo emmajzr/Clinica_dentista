@@ -30,5 +30,4 @@ class Paciente extends Model
     {
         return $this->hasMany(Cita::class);
     }
-
 }

@@ -15,9 +15,10 @@ class AdminMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if(!auth()->check() || auth()->user()->rol !== "admin") {
+        if (! auth()->check() || auth()->user()->rol !== 'admin') {
             abort(403, 'Acceso no autorizado');
         }
+
         return $next($request);
     }
 }

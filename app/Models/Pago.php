@@ -11,7 +11,7 @@ class Pago extends Model
     protected $fillable = [
         'id_cita',
         'monto',
-        'fecha_pago'
+        'fecha_pago',
     ];
 
     // Relación uno a uno con Cita

@@ -12,7 +12,7 @@ class Horario_Disponible extends Model
         'id_dentista',
         'dia_semana',
         'hora_inicio',
-        'hora_fin'
+        'hora_fin',
     ];
 
     // Relación con Dentista

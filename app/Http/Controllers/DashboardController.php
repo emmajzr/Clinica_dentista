@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cita;
-use App\Models\Tratamiento;
-use App\Models\Pago;
 use App\Models\Paciente;
+use App\Models\Pago;
+use App\Models\Tratamiento;
 use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller
@@ -17,8 +17,8 @@ class DashboardController extends Controller
         // Verificar si el usuario es paciente y tiene registro en tabla pacientes
         if ($user->rol === 'paciente') {
             $paciente = $user->paciente;
-            
-            if (!$paciente) {
+
+            if (! $paciente) {
                 // Redirigir al formulario de registro de paciente con mensaje
                 return redirect()->route('paciente.register')
                     ->with('warning', 'Por favor completa tu registro para acceder al dashboard.');
@@ -34,7 +34,8 @@ class DashboardController extends Controller
                 ->where('estado', 'completada')
                 ->count();
 
-            $proxima_cita = Cita::where('id_paciente', $paciente->id)
+            $proxima_cita = Cita::with('dentista.user')
+                ->where('id_paciente', $paciente->id)
                 ->where('estado', 'pendiente')
                 ->where('fecha', '>=', now()->toDateString())
                 ->orderBy('fecha', 'asc')
@@ -54,21 +55,39 @@ class DashboardController extends Controller
                 ->take(3)
                 ->get();
 
-
-            // Últimos 3 pagos + total pagado
+            // Pagos agrupados últimos 3 meses desde hoy
             $ultimos_pagos = Pago::whereHas('cita', function ($q) use ($paciente) {
                 $q->where('id_paciente', $paciente->id);
-            })->orderBy('fecha_pago', 'desc')->take(3)->get();
+            })
+                ->where('fecha_pago', '>=', now()->subMonths(3))
+                ->select(
+                    DB::raw('YEAR(fecha_pago) as anio'),
+                    DB::raw('MONTH(fecha_pago) as mes'),
+                    DB::raw('SUM(monto) as total_mes')
+                )
+                ->groupBy('anio', 'mes')
+                ->orderBy('anio', 'desc')
+                ->orderBy('mes', 'desc')
+                ->take(3)
+                ->get();
 
+            // Total pagado acumulado en el año actual
             $total_pagado = Pago::whereHas('cita', function ($q) use ($paciente) {
                 $q->where('id_paciente', $paciente->id);
-            })->sum('monto');
+            })
+                ->whereYear('fecha_pago', now()->year)
+                ->sum('monto');
 
-            return view('dashboard.paciente', compact(
-                'miembro_desde', 'citas', 'proxima_cita', 'tratamientos_realizados',
-                'ultimas_atenciones', 'ultimos_pagos', 'total_pagado'
+            return view('dashboard', compact(
+                'citas',
+                'proxima_cita',
+                'tratamientos_realizados',
+                'ultimas_atenciones',
+                'ultimos_pagos',
+                'total_pagado',
+                'miembro_desde'
             ));
         }
-        
+
     }
 }

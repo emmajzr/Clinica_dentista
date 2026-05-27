@@ -12,14 +12,14 @@ class Dentista extends Model
         'telefono',
         'user_id',
     ];
-    
+
     // Relación uno a uno con User
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id');
     }
 
-    // Relación uno a muchos con Cita    
+    // Relación uno a muchos con Cita
     public function citas()
     {
         return $this->hasMany(Cita::class, 'id_dentista');

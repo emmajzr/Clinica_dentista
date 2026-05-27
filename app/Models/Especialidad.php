@@ -10,7 +10,7 @@ class Especialidad extends Model
 
     protected $fillable = [
         'nombre_especialidad',
-        'descripcion'
+        'descripcion',
     ];
 
     // Relación muchos a muchos con Dentista

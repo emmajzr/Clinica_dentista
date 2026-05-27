@@ -7,9 +7,12 @@
                 <i class="fas fa-tooth text-cyan-600"></i>
             </div>
             <div>
-                <h1 class="text-cyan-600 font-bold text-xl">Clínica Dental Belinda</h1>
+                <h1 class="text-cyan-600 font-bold text-xl">
+                    Clínica Dental Belinda
+                </h1>
                 <p class="text-gray-400 text-xs">
-                    <i class="fas fa-calendar-alt mr-1"></i> Sistema de Gestión Dental
+                    <i class="fas fa-calendar-alt mr-1"></i> Sistema de Gestión
+                    Dental
                 </p>
             </div>
         </div>
@@ -18,17 +21,26 @@
         <div class="relative">
             <x-dropdown align="right" width="64">
                 <x-slot name="trigger">
-                    <button class="flex items-center gap-3 bg-gray-50 hover:bg-gray-100 rounded-xl px-3 py-2 transition">
-                        <div class="w-10 h-10 rounded-full bg-gradient-to-r from-cyan-500 to-blue-600 text-white flex items-center justify-center font-bold">
+                    <button
+                        class="flex items-center gap-3 bg-gray-50 hover:bg-gray-100 rounded-xl px-3 py-2 transition"
+                    >
+                        <div
+                            class="w-10 h-10 rounded-full bg-gradient-to-r from-cyan-500 to-blue-600 text-white flex items-center justify-center font-bold"
+                        >
                             {{ strtoupper(substr(Auth::user()->nombre, 0, 1)) }}
                         </div>
                         <div class="text-left hidden md:block">
-                            <div class="font-medium text-sm">{{ Auth::user()->nombre }}</div>
+                            <div class="font-medium text-sm">
+                                {{ Auth::user()->nombre }}
+                            </div>
                             <div class="text-xs text-gray-400">
-                                <i class="fas fa-envelope mr-1"></i> {{ Auth::user()->email }}
+                                <i class="fas fa-envelope mr-1"></i>
+                                {{ Auth::user()->email }}
                             </div>
                         </div>
-                        <i class="fas fa-chevron-down text-gray-400 text-xs hidden md:block"></i>
+                        <i
+                            class="fas fa-chevron-down text-gray-400 text-xs hidden md:block"
+                        ></i>
                     </button>
                 </x-slot>
                 <x-slot name="content">
@@ -40,8 +52,15 @@
                     </x-dropdown-link>
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
-                        <x-dropdown-link :href="route('logout')" onclick="event.preventDefault(); this.closest('form').submit();">
-                            <i class="fas fa-sign-out-alt mr-2"></i> Cerrar sesión
+                        <x-dropdown-link
+                            :href="route('logout')"
+                            onclick="
+                                event.preventDefault();
+                                this.closest('form').submit();
+                            "
+                        >
+                            <i class="fas fa-sign-out-alt mr-2"></i> Cerrar
+                            sesión
                         </x-dropdown-link>
                     </form>
                 </x-slot>
